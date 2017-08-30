@@ -18,8 +18,8 @@ from workflow.views import *
 
 
 urlpatterns = [
-    url(r'^$', add_task, name='add_task'),
-    url(r'^add_task/$', add_task, name='add_task'),
+    url(r'^$', link_task, name='link_task'),
+    url(r'^link_task/$', link_task, name='link_task'),
     url(r'^waiting_task/$', waiting_task, name='waiting_task'),
     url(r'^done_task/$', done_task, name='done_task'),
     url(r'^sent_task/$', sent_task, name='sent_task'),

@@ -5,9 +5,9 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 @login_required
-def add_task(request):
+def link_task(request):
     title,title_list = '新建事项','新建事项列表'
-    return render_to_response('workflow/add_task.html',locals())
+    return render_to_response('workflow/link_task.html',locals())
 @login_required
 def waiting_task(request):
     title,title_list = '待办事项','待办事项列表'

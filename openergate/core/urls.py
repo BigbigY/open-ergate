@@ -19,4 +19,7 @@ from core.views import *
 
 urlpatterns = [
     url(r'^$', index, name='index'),
+    url(r'^add_role', add_role),
+    url(r'^edit_role$', edit_role),
+    url(r'^role_list$', role_list),
 ]

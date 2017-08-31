@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'core',
     'user',
     'workflow',
 ]
@@ -126,3 +127,4 @@ STATICFILES_DIRS = (
 
 # admin认证url
 LOGIN_URL = '/user/login/'
+

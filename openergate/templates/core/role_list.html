@@ -49,7 +49,7 @@ $("#key").keydown(function(e){
     <td align="left" valign="middle">{{ret.creator}}</td>
     <td align="left" valign="middle">{{ret.create_time}}</td>
     <td align="left" valign="middle">{{ret.update_time}}</td>
-    <td align="center" valign="middle"><a href="javascript:void(0);" class="handle" onclick="openWin('/edit_role?id={{ ret.id}}');"><img title='处理' src="/static/img/pencil.png" alt="Edit"></a>{% ifequal ret.flag 0 %}<a href="javascript:void(0);" class="handle" onclick="if(confirm('确实要删除吗?'))del_role('{{ ret.id }}');"><img title='删除' src="/static/img/cross.png" alt="Delete"></a>{% endifequal %}</td>
+    <td align="center" valign="middle"><a href="javascript:void(0);" class="handle" onclick="openWin('/edit_role?id={{ ret.id}}');"><img title='处理'  class="fa fa-edit" alt="Edit"></a>{% ifequal ret.flag 0 %}<a href="javascript:void(0);" class="handle" onclick="if(confirm('确实要删除吗?'))del_role('{{ ret.id }}');"><img title='删除' class="fa fa-times" alt="Delete"></a>{% endifequal %}</td>
   </tr>
 {% endfor %}
 </tbody>

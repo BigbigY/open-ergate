@@ -22,4 +22,5 @@ urlpatterns = [
     url(r'^add_role', add_role),
     url(r'^edit_role$', edit_role),
     url(r'^role_list$', role_list),
+    url(r'^ajax_role$', ajax_role),
 ]

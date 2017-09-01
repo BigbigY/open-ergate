@@ -84,8 +84,9 @@ def add_role(request):
     users = User.objects.all()
     return render_to_response('core/add_role.html',locals())
 
+
 @login_required
-@require_role(role_list=['user_role_admin','superuser'])
+@require_role(role_list=['user_role_admin', 'superuser'])
 def ajax_role(request):
     user = request.user
     ret = False
@@ -99,26 +100,24 @@ def ajax_role(request):
         if act == 'add':
             user_list = users.split(',')
             user_obj = User.objects.filter(username__in=user_list)
-            ret = Role.objects.create(name=name,zh_name=zh_name,desc=desc, creator=user.username)
+            ret = Role.objects.create(name=name, zh_name=zh_name, desc=desc, creator=user.username)
             role_obj = Role.objects.get(id=ret.id)
             role_obj.users.add(*user_obj)
-            if ret:
-                ret = '添加成功'
+            if ret: ret = '添加成功'
         elif act == 'del':
             ret = Role.objects.filter(id=role_id,flag=0).delete()
-            if ret:
-                ret = '删除成功'
+            if ret: ret = '删除成功'
         elif act == 'edit':
             user_list = users.split(',')
             user_obj = User.objects.filter(username__in=user_list)
-            ret = Role.object.filter(id=role_id).update(name=name,zh_name=zh_name,desc=desc)
+            ret = Role.objects.filter(id=role_id).update(name=name, zh_name=zh_name, desc=desc)
             role_obj = Role.objects.get(id=role_id)
             role_obj.users = user_obj
             role_obj.save()
-            if ret:
-                ret = '修改成功'
+            if ret: ret = '修改成功'
         else:
             ret = '参数错误'
+    return HttpResponse(ret)
 
 @login_required
 @require_role(role_list=['user_role_admin','superuser'])

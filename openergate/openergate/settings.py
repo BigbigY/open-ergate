@@ -50,6 +50,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
 ]
 
 ROOT_URLCONF = 'openergate.urls'
@@ -128,6 +129,10 @@ STATICFILES_DIRS = (
 # admin认证url
 LOGIN_URL = '/user/login/'
 
+#workflow
+TASK_STATE_DICT = {0:'已撤销', 1:'新建中', 2:'已提交,等待审批', 3:'已审批', 4:'已处理', 5:'已结束'}
+ACT_TYPE_DICT = {0:'撤销', 1:'同意', 2:'回退修改'}
+CREATOR_ACT_TYPE_DICT = {0:'撤销', 1:'确认'}
 
 # LOG
 LOGGING = {

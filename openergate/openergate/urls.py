@@ -21,5 +21,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^user/', include('user.urls')),
     url(r'^', include('core.urls')),
-    url(r'^workflow/', include('workflow.urls')),
+    url(r'^workflow/', include('workflow.urls', namespace='workflow')),
 ]

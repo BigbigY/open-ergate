@@ -1,3 +1,58 @@
 {% include 'head.html' %}
-<h1>page</h1>
+<script type="text/javascript">
+function change_info(){
+        var args = $("#key").serialize();
+        window.location = window.location.pathname + "?" + args;
+    }
+function del(id){
+    $.post("/workflow/ajax_order", {"act":'del', "id":id}, function(json){ 
+        alert(json);
+        window.location.reload();
+    });
+} 
+$(document).ready(function() {
+$("#key").keydown(function(e){
+    if(e.keyCode==13){
+        change_info()
+    }
+});
+});
+</script>
+<div class="adminTable">
+<div class="infoForm">
+<section class="content-header">
+<input id="search" name="search" type="submit" style="float:right" value="添加工作流" class="btn btn-success btn-xs" onclick="openWin('/workflow/add_order');"/>
+</section>
+</div>
+<table width="100%"  cellspacing="0" cellpadding="0" class="table table-striped">
+<thead>
+  <tr>
+    <th align="left" valign="middle">工单名</th>
+    <th align="left" valign="middle">工单标题</th>
+    <th align="left" valign="middle">描述</th>
+    <th align="left" valign="middle">审批流程</th>
+    <th align="left" valign="middle">是否激活</th>
+    <th align="left" valign="middle">创建人</th>
+    <th align="left" valign="middle">创建时间</th>
+    <th align="left" valign="middle">更新时间</th>
+    <th align="center" valign="middle">操作</th>
+  </tr>
+</thead>
+<tbody>
+{% for ret in rets %}
+  <tr id={{ret.id}}>
+    <td align="left" valign="middle">{{ret.name}}</td>
+    <td align="left" valign="middle">{{ret.title}}</td>
+    <td align="left" valign="middle">{{ret.desc}}</td>
+    <td align="left" valign="middle">{{ret.flow|get_flow_names}}</td>
+    <td align="left" valign="middle">{% ifequal ret.is_active 1 %}已激活{% else%}已禁用{% endifequal %}</td>
+    <td align="left" valign="middle">{{ ret.creator }}</td>
+    <td align="left" valign="middle">{{ ret.create_time }}</td>
+    <td align="left" valign="middle">{{ ret.update_time }}</td>
+    <td align="center" valign="middle"><a href="javascript:void(0);" class="fa fa-edit" onclick="openWin('/workflow/edit_order?id={{ ret.id}}');"></a> <a href="javascript:void(0);" class="fa fa-trash-o" onclick="if(confirm('确实要删除吗?'))del('{{ret.id}}')"></a></td>
+  </tr>
+{% endfor %}
+</tbody>
+</table>
+</div>
 {% include 'tail.html' %}

@@ -27,11 +27,6 @@ $("#key").keydown(function(e){
 });
 </script>
 <div class="adminTable">
-<div class="infoForm">
-<section class="content-header">
-<input id="search" name="search" type="submit" style="float:right" value="搜索" class="Btn" onclick="change_info()"/><input id="key" name="key" type="text" class="form_2" style="float:right" value="{{ key }}"/>
-</section>
-</div>
 <table width="100%"  cellspacing="0" cellpadding="0" class="table table-striped">
 <thead>
   <tr>
@@ -53,8 +48,8 @@ $("#key").keydown(function(e){
     <td align="left" valign="middle">{{ret.id}}</td>
     <td align="left" valign="middle">{{ret.title}}</td>
     <td align="left" valign="middle">{{ret.creator}}</td>
-    <td align="left" valign="middle">{{ret.create_time}}</td>
-    <td align="left" valign="middle">{{ ret.update_time }}</td>
+    <td align="left" valign="middle">{{ret.create_time|date:"Y-m-d H:i:s"}}</td>
+    <td align="left" valign="middle">{{ ret.update_time|date:"Y-m-d H:i:s" }}</td>
     <td align="left" valign="middle">{{role_dict|get_item:ret.cur_role_id}}</td>
     <td align="left" valign="middle">{{ ret.cur_users }}</td>
     <td align="left" valign="middle">{{ ret.cur_user }}</td>

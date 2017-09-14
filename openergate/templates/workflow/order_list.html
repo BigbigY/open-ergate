@@ -47,8 +47,8 @@ $("#key").keydown(function(e){
     <td align="left" valign="middle">{{ret.flow|get_flow_names}}</td>
     <td align="left" valign="middle">{% ifequal ret.is_active 1 %}已激活{% else%}已禁用{% endifequal %}</td>
     <td align="left" valign="middle">{{ ret.creator }}</td>
-    <td align="left" valign="middle">{{ ret.create_time }}</td>
-    <td align="left" valign="middle">{{ ret.update_time }}</td>
+    <td align="left" valign="middle">{{ ret.create_time|date:"Y-m-d H:i:s" }}</td>
+    <td align="left" valign="middle">{{ ret.update_time|date:"Y-m-d H:i:s" }}</td>
     <td align="center" valign="middle"><a href="javascript:void(0);" class="fa fa-edit" onclick="openWin('/workflow/edit_order?id={{ ret.id}}');"></a> <a href="javascript:void(0);" class="fa fa-trash-o" onclick="if(confirm('确实要删除吗?'))del('{{ret.id}}')"></a></td>
   </tr>
 {% endfor %}

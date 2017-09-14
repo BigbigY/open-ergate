@@ -1,4 +1,3 @@
-{% include 'head.html' %}
 <script type="text/javascript">
 $(document).ready(function() {
     $('#submit').click(function(){
@@ -27,20 +26,6 @@ $(document).ready(function() {
     });
 });
 </script>
-<div class="x_panel">
-<fieldset>
-                                    <legend> {{title_user}} </legend>
-                           
-                                    <div class="field-group">
-                                        <label class="required title" for="request_name"><font color="red">*</font>申请人:</label>&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <input name="request_name" type="text" class="medium-140" id="request_name" value="{{ user.last_name }}">
-                                        <span class="required title" for="request_mail"><b><font color="red">*</font>邮箱:</b></span>&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <input name="request_mail" type="text" class="medium-140" value="{{ user.email }}" readonly="true">               
-                                    </div> 
-        
-                                </fieldset>
-</div>
-<div class="x_panel">
 <div style="float:left;width:800px;">
 	<fieldset> 
 		<legend >{{title_text}}</legend>
@@ -69,8 +54,5 @@ cpu 2核<br>
    
              	
 	</div></fieldset>
-</div>
-</div>
 <button id="submit" type="submit" class="btn btn-round btn-success">确认发送</button>
 <button type="button" class="btn btn-round btn-success">返回</button>
-{% include 'tail.html' %}

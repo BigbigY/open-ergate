@@ -7,10 +7,9 @@ $(document).ready(function() {
 <div class="adminTable">
 <div class="infoForm">
 <section class="content-header">
-    <h1>{{title}}</h1>
 </section>
 {% for ret in rets %}
-<a href="javascript:void(0);" class="handle" onclick="openWin('{% url 'workflow:add_task' %}?order_id={{ ret.id}}');">{{ ret.title }}{% if not ret.flow %}(免审批){% endif %}</a>
+<a href="javascript:void(0);" class="btn btn-round btn-success" onclick="openWin('{% url 'workflow:add_task' %}?order_id={{ ret.id}}');">{{ ret.title }}{% if not ret.flow %}(免审批){% endif %}</a>
 {% endfor %}
 </div>
 </div>

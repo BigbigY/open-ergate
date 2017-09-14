@@ -9,19 +9,17 @@ $(document).ready(function() {
                 return false;
             }
         }
-        var message = check_submit();
+        /*var message = check_submit();
         if(message) {
             alert(message);
             return false;
-        }
+        }*/
         if(confirm("确认提交吗？")){ 
             $.post("{% url 'workflow:ajax_task' %}", $("form").serialize(), function(json){ 
                 alert(json);
-                if (window.opener && !window.opener.closed) {
-                    window.parent.opener.location.reload();
-                }
-                window.close();
+		window.location = document.referrer;
             });
+	    return false;
         }
         return false;
     });

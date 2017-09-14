@@ -1,4 +1,4 @@
-{% include 'head.html' %}
+<!DOCTYPE html>
 <html>
 <head lang="en">
     <meta charset="UTF-8">
@@ -56,7 +56,6 @@ $(document).ready(function() {
 </div>
 </div>
 {% include template_name %}
-
 {% if display_log %}
 <div class="adminTable">
 <div class="infoForm">
@@ -108,6 +107,3 @@ START->{{work_order_flow|get_flow_names}}->{{ role_dict.0 }}->END
 </div>
 </body>
 </html>
-
-
-{% include 'tail.html' %}

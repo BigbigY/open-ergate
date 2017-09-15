@@ -53,7 +53,7 @@ $("#key").keydown(function(e){
     <td align="left" valign="middle">{{ ret.cur_users }}</td>
     <td align="left" valign="middle">{{ ret.cur_user }}</td>
     <td align="left" valign="middle">{{ state_dict|get_item:ret.state }}</td>
-    <td align="center" valign="middle"><a href="javascript:void(0);" class="handle" onclick="openWin('{% url 'workflow:show_task' %}?id={{ ret.id}}');"><img title='查看' src="/static/img/information.png" alt="show"></a> <a href="javascript:void(0);" class="handle" onclick="openWin('{% url 'workflow:edit_task' %}?id={{ ret.id}}');"> <img title='处理' src="/static/img/pencil.png" alt="Edit"></a> <a href="{% url 'workflow:unlock_task' %}?id={{ ret.id }}"> <img title='解除锁定' src="/static/img/unlock.png" alt="unlock"></a></td>
+    <td align="center" valign="middle"><a href="javascript:void(0);" class="fa fa-eye" onclick="openWin('{% url 'workflow:show_task' %}?id={{ ret.id}}');"></a> <a href="javascript:void(0);" class="fa fa-edit" onclick="openWin('{% url 'workflow:edit_task' %}?id={{ ret.id}}');"></a> <a href="{% url 'workflow:unlock_task' %}?id={{ ret.id }}" class="fa fa-unlock-alt" ></a></td>
   </tr>
 {% endfor %}
 </tbody>

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'core',
     'user',
     'workflow',
+    'djcelery',
 ]
 
 MIDDLEWARE = [
@@ -133,10 +134,30 @@ LOGIN_URL = '/user/login/'
 #分页
 PAGE_LIMIT = 20
 
+import djcelery
+djcelery.setup_loader()
+BROKER_URL = 'amqp://guest:guest@localhost:5672/'
+
 #workflow
 TASK_STATE_DICT = {0:'已撤销', 1:'新建中', 2:'已提交,等待审批', 3:'已审批', 4:'已处理', 5:'已结束'}
 ACT_TYPE_DICT = {0:'撤销', 1:'同意', 2:'回退修改'}
 CREATOR_ACT_TYPE_DICT = {0:'撤销', 1:'确认'}
+
+#email
+ADMINS = (
+    ('wangyangyang', '962653920@qq.com'),
+)
+DEFAULT_FROM_EMAIL = SERVER_EMAIL = ''
+EMAIL_HOST = 'smtp.exmail.qq.com'
+EMAIL_HOST_USER = '962653920'
+EMAIL_HOST_PASSWORD = 'YY520it@'
+EMAIL_PORT = 465
+EMAIL_SUBJECT_PREFIX = '[workflow] '
+#EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
+
+#访问域名，用于发送邮件返回给用户访问本系统的地址
+SYS_API = 'http://10.0.13.134:8000'
 
 # LOG
 LOGGING = {

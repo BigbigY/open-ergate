@@ -255,17 +255,24 @@ def unlock_task(request):
 @login_required
 def ajax_task(request):
     user = request.user
+    print (user)
     username = user.username
+    print (username)
     is_supervisor = 0
+    print (is_supervisor)
     #判断是否有督办权限
     roles = [row.name for row in user.role_set.all()]
     if 'workflow_supervisor' in roles: 
         is_supervisor = 1
+        print (is_supervisor)
         admin_role_id = Role.objects.get(name='workflow_supervisor').id
     if request.method == 'POST':
+        print ('request.method',request.method)
         act = request.POST.get('act','').strip()
+        print ('act',act)
         #提交工单
         if act == 'add':
+            print ("提交工单")
             task_id = request.POST.get('task_id','').strip()
             creator = request.POST.get('creator','').strip()
             creator_name = user.last_name
@@ -285,7 +292,6 @@ def ajax_task(request):
                 data.pop('next_user')
                 next_user, next_user_mail = next_user.split('_')
             data.pop('work_order_id')
-            print ('------1')
             work_order_obj = Work_order.objects.get(id=work_order_id)
             work_order_title = work_order_obj.title
             work_order_name = work_order_obj.name
@@ -303,6 +309,7 @@ def ajax_task(request):
                 result = '免审批工单已提交'
             #审批流程
             else:    
+                print ('审批流程')
                 next_state = 2
                 next_users = Role.objects.get(id=next_role_id).users.all()
                 next_users = [row.username for row in next_users]
@@ -319,13 +326,19 @@ def ajax_task(request):
                 else:
                     ret = Task.objects.create(title=title, creator=creator, work_order_id=work_order_id, flow=flow, 
                         data=data, state=next_state, cur_role_id=next_role_id, cur_users=next_users, cur_user='')
-                    task_id = ret.id 
+                    task_id = ret.id
                 #给审批人发送工单处理通知
+                print ('#给审批人发送工单处理通知')
                 tolist = [next_user_mail]
+                print (tolist,'tolist')
                 subject = '<%s>工单处理通知' % title
+                print ('subject',subject)
                 content = '<br>您好！<br>%s 工单任务已发起，等待您处理，<a href="%s/workflow/edit_task?id=%d" target="_blank">点击此处查看处理</a>，谢谢！' % (title, settings.SYS_API, task_id)
+                print ('content',content)
                 send_html_mail(tolist, subject, content)
+                print ('next_state',next_state)
                 result = settings.TASK_STATE_DICT[next_state]
+                print ('result',result)
         #审批工单
         elif act == 'audit':
             #task_id、act_type和act_opinion是必须参数，act_opinion参数内容可以为空，next_user为可选参数，是当前审批人指定下一位审批人
@@ -351,6 +364,8 @@ def ajax_task(request):
             flow_list = flow.split('-')
             #当前审批人是工单申请人时
             if cur_user == creator and cur_state == 4:
+                print ('cur_user',cur_user)
+                print ('cur_state',cur_state)
                 next_role_id = -1
                 next_users = next_user = ''
                 #撤销
@@ -359,9 +374,11 @@ def ajax_task(request):
                 if act_type == 1: next_state = 5
             #当前审批角色是流程最后一个审批角色时
             elif flow_list.index(str(cur_role_id)) + 1 == len(flow_list):
+                print ('下一个审批角色为申请人')
                 #下一个审批角色为申请人
                 next_role_id = 0
                 #撤销
+                print ('act_type',act_type)
                 if act_type == 0: 
                     next_state = 0
                     next_role_id = -1
@@ -371,6 +388,7 @@ def ajax_task(request):
                     try:
                         exec_task.delay(task_id)
                     except Exception as e:
+                        print ('错误')
                         logger.error("rabbitmq error:" + e)
                         return HttpResponse('添加任务报错了')
                     next_state = 4
@@ -383,6 +401,7 @@ def ajax_task(request):
                     next_users = creator + ';'
             #当前审批角色非最后一个审批角色时
             else:
+                print ('111111111111')
                 #撤销
                 if act_type == 0:
                     next_role_id = -1
@@ -409,6 +428,7 @@ def ajax_task(request):
                     next_user = creator
                     next_users = creator + ';'
             #督办人员
+            print ('111111111111')
             if username not in cur_users.split(';') and admin_role_id: cur_role_id = admin_role_id
             Task.objects.filter(id=task_id).update(state=next_state, cur_role_id=next_role_id, cur_users=next_users, cur_user='')
             Task_log.objects.create(task_id=task_id,username=username,role_id=cur_role_id,act_type=act_type,act_opinion=act_opinion)
@@ -559,6 +579,7 @@ def show_task(request):
 
 @login_required
 def edit_task(request):
+    print ('edit_task')
     title = '审批工单'
     #处理工单必须包含id参数
     task_id = request.GET.get('id','').strip()
@@ -580,6 +601,7 @@ def edit_task(request):
     work_order_flow = ret.flow
     flow_list = work_order_flow.split('-')
     template_name = 'workflow/%s_form.html' % work_order_info.name
+    print (template_name)
     cur_users = ret.cur_users
     cur_user = ret.cur_user
     #当前处理人是申请人和流程最后两个审批角色的人在页面中选择审批人隐藏

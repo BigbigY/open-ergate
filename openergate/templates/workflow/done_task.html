@@ -52,7 +52,7 @@ $("#key").keydown(function(e){
     <td align="left" valign="middle">{{ ret.cur_users }}</td>
     <td align="left" valign="middle">{{ ret.cur_user }}</td>
     <td align="left" valign="middle">{{ state_dict|get_item:ret.state }}</td>
-    <td align="center" valign="middle"><a href="javascript:void(0);" class="handle" onclick="openWin('{% url 'workflow:show_task' %}?id={{ ret.id}}');"><img title='查看' src="/static/img/information.png" alt="show"></a></td>
+    <td align="center" valign="middle"><a href="javascript:void(0);" class="fa fa-eye" onclick="openWin('{% url 'workflow:show_task' %}?id={{ ret.id}}');"></td>
   </tr>
 {% endfor %}
 </tbody>

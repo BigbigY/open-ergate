@@ -145,12 +145,12 @@ CREATOR_ACT_TYPE_DICT = {0:'撤销', 1:'确认'}
 
 #email
 ADMINS = (
-    ('wangyangyang', '962653920@qq.com'),
+    ('admin', 'wangyy02@bighug.com'),
 )
-DEFAULT_FROM_EMAIL = SERVER_EMAIL = ''
+DEFAULT_FROM_EMAIL = SERVER_EMAIL = 'wangyy02@bighug.com'
 EMAIL_HOST = 'smtp.exmail.qq.com'
-EMAIL_HOST_USER = '962653920'
-EMAIL_HOST_PASSWORD = 'YY520it@'
+EMAIL_HOST_USER = 'wangyy02@bighug.com'
+EMAIL_HOST_PASSWORD = 'YY520it@123'
 EMAIL_PORT = 465
 EMAIL_SUBJECT_PREFIX = '[workflow] '
 #EMAIL_USE_TLS = False

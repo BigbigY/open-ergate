@@ -74,14 +74,18 @@ def send_html_mail(tolist, subject, html_content, fromer=None, cclist=None, bccl
         _fromer = settings.EMAIL_HOST_USER
     
     msg = EmailMessage(subject, html_content, _fromer, tolist)
+    print ('msg',msg.content_subtype)
     msg.content_subtype = "html"
     if cclist: msg.cc = cclist
     if bcclist: msg.bcc = bcclist
     ret = msg.send(fail_silently=True)
+    print ('ret',ret)
     if ret == 1:
         ret = True
+        print ('aa',ret)
     else:
         ret = False
+        print ('bb',ret)
     return ret
 
 def make_password(length=8):

@@ -84,7 +84,7 @@ def ajax_order(request):
             ret = Work_order.objects.create(name=name, title=title, desc=desc, flow=flow, creator=username, is_active=is_active)
             if ret:
                 result = '添加成功'
-                templates_dir = "%s/mysite/templates/workflow" % settings.BASE_DIR
+                templates_dir = "%s/templates/workflow" % settings.BASE_DIR
                 scripts_dir = "%s/workflow/scripts" % settings.BASE_DIR
                 os.system("cd %s;test -f %s_form.html || \cp demo_form.html %s_form.html" % (templates_dir, name, name))
                 os.system("cd %s;test -f %s.sh || \cp demo.sh %s.sh" % (scripts_dir, name, name))
@@ -341,6 +341,7 @@ def ajax_task(request):
                 print ('result',result)
         #审批工单
         elif act == 'audit':
+            print ('审批工单')
             #task_id、act_type和act_opinion是必须参数，act_opinion参数内容可以为空，next_user为可选参数，是当前审批人指定下一位审批人
             task_id  = request.POST.get('task_id','').strip()
             act_type  = request.POST.get('act_type','').strip()
@@ -385,6 +386,7 @@ def ajax_task(request):
                     next_users = next_user = ''
                 #同意
                 if act_type == 1: 
+                    print ('同意')
                     try:
                         exec_task.delay(task_id)
                     except Exception as e:
@@ -409,6 +411,7 @@ def ajax_task(request):
                     next_users = next_user = ''
                 #同意
                 elif act_type == 1:
+                    print ('同意')
                     next_role_id = flow_list[flow_list.index(str(cur_role_id))+1]
                     next_users = Role.objects.get(id=next_role_id).users.all()
                     tolist = [row.email for row in next_users]

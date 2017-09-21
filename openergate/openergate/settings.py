@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -41,6 +40,7 @@ INSTALLED_APPS = [
     'user',
     'workflow',
     'djcelery',
+    'dj_pagination',
 ]
 
 MIDDLEWARE = [
@@ -51,7 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
+    'dj_pagination.middleware.PaginationMiddleware',
 ]
 
 ROOT_URLCONF = 'openergate.urls'
@@ -67,6 +67,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.core.context_processors.i18n',
+                'django.core.context_processors.media',
+                'django.core.context_processors.request',
             ],
         },
     },
@@ -132,7 +135,7 @@ LOGIN_URL = '/user/login/'
 
 
 #分页
-PAGE_LIMIT = 20
+PAGE_LIMIT = 10
 
 import djcelery
 djcelery.setup_loader()
@@ -145,11 +148,11 @@ CREATOR_ACT_TYPE_DICT = {0:'撤销', 1:'确认'}
 
 #email
 ADMINS = (
-    ('admin', 'wangyy02@bighug.com'),
+    ('admin', 'wangyy02@bbtree.com'),
 )
-DEFAULT_FROM_EMAIL = SERVER_EMAIL = 'wangyy02@bighug.com'
+DEFAULT_FROM_EMAIL = SERVER_EMAIL = 'wangyy02@bbtree.com'
 EMAIL_HOST = 'smtp.exmail.qq.com'
-EMAIL_HOST_USER = 'wangyy02@bighug.com'
+EMAIL_HOST_USER = 'wangyy02@bbtree.com'
 EMAIL_HOST_PASSWORD = 'YY520it@123'
 EMAIL_PORT = 465
 EMAIL_SUBJECT_PREFIX = '[workflow] '

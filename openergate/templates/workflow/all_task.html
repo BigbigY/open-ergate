@@ -40,6 +40,8 @@ $("#key").keydown(function(e){
   </tr>
 </thead>
 <tbody>
+{% load pagination_tags %}
+{% autopaginate rets pagenum %}
 {% for ret in rets %}
   <tr id={{ret.id}}>
     <td align="left" valign="middle">{{ret.id}}</td>
@@ -56,6 +58,7 @@ $("#key").keydown(function(e){
 {% endfor %}
 </tbody>
 </table>
+{% paginate %}
 </div>
 </body>
 </html>

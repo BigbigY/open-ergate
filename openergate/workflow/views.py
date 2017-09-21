@@ -139,6 +139,7 @@ def waiting_task(request):
         rets = Task.objects.filter(Q(cur_users__contains=username+';')|Q(cur_user=username)).order_by('-id')
     msgnum = rets.count()
     pagenum = settings.PAGE_LIMIT
+    print (pagenum)
     role_dict = get_role_name()
     state_dict = settings.TASK_STATE_DICT
     return render_to_response('workflow/waiting_task.html',locals())

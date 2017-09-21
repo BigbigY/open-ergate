@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!--
 <html>
 <head lang="en">
     <meta charset="UTF-8">
@@ -15,8 +14,6 @@
 <script src="/static/workflow/static/js/admin.js" type="text/javascript"></script>
 </head>
 <body>
--->
-{% include 'head.html' %}
 <script type="text/javascript">
     var speed = 2000;
     bar = setInterval(function(){
@@ -53,40 +50,6 @@ $(document).ready(function() {
     });
 });
 </script>
-<div id="wizard" class="form_wizard wizard_horizontal">
-                      <ul class="wizard_steps anchor">
-                        <li>
-                          <a href="#step-1" class="done" isdone="1" rel="1">
-                            <span class="step_no">1</span>
-                            <span class="step_descr">
-                                              第一步<br>
-                                              <small>填写表单</small>
-                                          </span>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#step-2" class="done" isdone="0" rel="2">
-                            <span class="step_no">2</span>
-                            <span class="step_descr">
-                                              第二步<br>
-                                              <small>等待审批</small>
-                                          </span>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#step-3" class="done" isdone="0" rel="3">
-                            <span class="step_no">3</span>
-                            <span class="step_descr">
-                                              第三步<br>
-                                              <small>审批完成</small>
-                                          </span>
-                          </a>
-                        </li>
-                      </ul>
-                      </div><div id="step-2" class="content" style="display: none;">
-                      </div><div id="step-3" class="content" style="display: none;">
-</div>
-<div class="ln_solid"></div>
 <div class="adminTable">
 <div class="infoForm">
 <h3>申请人信息</h3>
@@ -96,7 +59,7 @@ $(document).ready(function() {
 <label class="control-label" for="inputEmail">邮箱</label>
 <input id="creator_mail" name="creator_mail" type="text" class="form_2 searchIpnutBtn" value="{{ creator_mail }}" readonly="true">
 <label class="control-label" for="inputEmail">申请时间</label>
-<input id="creator_mail" name="creator_mail" type="text" class="form_2 searchIpnutBtn" value="{{ create_time|date:"Y-m-d H:i:s" }}" readonly="true">
+<input id="creator_mail" name="creator_mail" type="text" class="form_2 searchIpnutBtn" value="{{ create_time }}" readonly="true">
 </div>
 </div>
 {% include template_name %}
@@ -124,5 +87,5 @@ START->{{work_order_flow|get_flow_names}}->{{ role_dict.0 }}->END
 {% endfor %}
 </div>
 </div>
-{% include 'tail.html' %}
-
+</body>
+</html>

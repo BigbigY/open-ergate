@@ -5,18 +5,17 @@ function check_submit(){
 $(document).ready(function() {
 });
 </script>
+<div class="ln_solid"></div>
 <div class="adminTable">
 <div class="infoForm">
 <h3>{{ work_order_title }}</h3>
-<label class="control-label" for="inputEmail">申请原因</label>
-<br><br>
-<textarea id="reason" name="reason" cols="" rows="" class="form_7" style="width:60%;height:300px;" {% if not display_submit %}readonly="true"{% endif %}>{{ data.reason.0 }}</textarea>
+<textarea id="reason" name="reason" cols="" rows="" class="form-control" style="width:60%;height:300px;" {% if not display_submit %}readonly="true"{% endif %}>{{ data.reason.0 }}</textarea>
 
-<br><br>
+<div class="ln_solid"></div>
 {% if display_submit %}
 {% if next_role_id != 0 %}
 <label class="control-label" for="inputEmail">审批人: </label>
-<select name="next_user" id="next_user" class="form_2 w150">
+<select name="next_user" style="width:30%;" id="next_user" class="form-control">
 {% ifnotequal next_users|length 1 %}<option value='' selected="selected">请选择审批人</option>{% endifnotequal %}
 {% for user in next_users %}
     <option{% ifequal user.username next_user %} selected="selected"{% endifequal %} value={{ user.username }}_{{ user.email }}>{{ user.username }}_{{ user.last_name }}</option>
@@ -24,8 +23,8 @@ $(document).ready(function() {
 </select>
 {% endif %}
 <br><br>
-<input id="submit" name="submit" type="submit" value="提交" class="Btn" />
+<input id="submit" name="submit" type="submit" value="提交" class="btn btn-round btn-success" />
 {% endif %}
 </div>
 </div>
-
+<div class="ln_solid"></div>

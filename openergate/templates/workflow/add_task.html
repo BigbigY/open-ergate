@@ -25,6 +25,40 @@ $(document).ready(function() {
     });
 });
 </script>
+<div id="wizard" class="form_wizard wizard_horizontal">
+                      <ul class="wizard_steps anchor">
+                        <li>
+                          <a href="#step-1" class="done" isdone="1" rel="1">
+                            <span class="step_no">1</span>
+                            <span class="step_descr">
+                                              第一步<br>
+                                              <small>填写表单</small>
+                                          </span>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#step-2" class="disabled" isdone="0" rel="2">
+                            <span class="step_no">2</span>
+                            <span class="step_descr">
+                                              第二步<br>
+                                              <small>等待审批</small>
+                                          </span>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#step-3" class="disabled" isdone="0" rel="3">
+                            <span class="step_no">3</span>
+                            <span class="step_descr">
+                                              第三步<br>
+                                              <small>审批完成</small>
+                                          </span>
+                          </a>
+                        </li>
+                      </ul>
+                      </div><div id="step-2" class="content" style="display: none;">
+                      </div><div id="step-3" class="content" style="display: none;">
+</div>
+<div class="ln_solid"></div>
 <div class="adminTable">
 <div class="infoForm">
 <h3>申请人信息</h3>

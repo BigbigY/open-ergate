@@ -86,7 +86,7 @@ def ajax_order(request):
                 result = '添加成功'
                 templates_dir = "%s/templates/workflow" % settings.BASE_DIR
                 scripts_dir = "%s/workflow/scripts" % settings.BASE_DIR
-                os.system("cd %s;test -f %s_form.html || \cp demo_form.html %s_form.html" % (templates_dir, name, name))
+                os.system("cd %s;test -f custom/%s_form.html || \cp demo_form.html custom/%s_form.html" % (templates_dir, name, name))
                 os.system("cd %s;test -f %s.sh || \cp demo.sh %s.sh" % (scripts_dir, name, name))
         elif act == 'edit':
             name = request.POST.get('name','').strip()
@@ -528,7 +528,7 @@ def add_task(request):
     work_order_title = work_order_info.title
     work_order_name = work_order_info.name
     #根据template_name名指定引用的form表单模板
-    template_name = 'workflow/%s_form.html' % work_order_name
+    template_name = 'workflow/custom/%s_form.html' % work_order_name
     display_submit = 1
     if next_role_id != 0:
         next_users = Role.objects.get(id=next_role_id).users.all()
@@ -558,7 +558,7 @@ def show_task(request):
     work_order_flow = ret.flow
     work_order_title = work_order_info.title
     work_order_name = work_order_info.name
-    template_name = 'workflow/%s_form.html' % work_order_name
+    template_name = 'workflow/custom/%s_form.html' % work_order_name
     creator = ret.creator
     data = json.loads(ret.data)
     user_info = User.objects.get(username=creator)
@@ -604,7 +604,7 @@ def edit_task(request):
     work_order_title = work_order_info.title
     work_order_flow = ret.flow
     flow_list = work_order_flow.split('-')
-    template_name = 'workflow/%s_form.html' % work_order_info.name
+    template_name = 'workflow/custom/%s_form.html' % work_order_info.name
     print (template_name)
     cur_users = ret.cur_users
     cur_user = ret.cur_user

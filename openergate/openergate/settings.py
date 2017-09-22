@@ -148,11 +148,11 @@ CREATOR_ACT_TYPE_DICT = {0:'撤销', 1:'确认'}
 
 #email
 ADMINS = (
-    ('admin', 'wangyy02@bbtree.com'),
+    ('admin', 'wangyy02@test.com'),
 )
-DEFAULT_FROM_EMAIL = SERVER_EMAIL = 'wangyy02@bbtree.com'
+DEFAULT_FROM_EMAIL = SERVER_EMAIL = 'wangyy02@test.com'
 EMAIL_HOST = 'smtp.exmail.qq.com'
-EMAIL_HOST_USER = 'wangyy02@bbtree.com'
+EMAIL_HOST_USER = 'wangyy02@test.com'
 EMAIL_HOST_PASSWORD = 'YY520it@'
 EMAIL_PORT = 465
 EMAIL_SUBJECT_PREFIX = '[workflow] '

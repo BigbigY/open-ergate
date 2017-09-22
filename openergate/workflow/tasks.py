@@ -12,10 +12,13 @@ from core.models import *
 from openergate.comm import *
 from .models import *
 
+print ('tasks')
+
 platforms.C_FORCE_ROOT = True
 
 @task()
 def exec_task(task_id):
+    print ('exec_task',task_id)
     ret = Task.objects.get(id=task_id)
     title = ret.title
     state = ret.state
@@ -31,5 +34,5 @@ def exec_task(task_id):
     print ('工单进度通知0000000')
     subject = '<%s>工单进度通知' % title
     content = '<br>您好！<br>%s 工单任务已处理，等待您确认，<a href="%s/workflow/edit_task?id=%d&state=%d" target="_blank">点击此处查看处理</a>，谢谢！' % (title, settings.SYS_API, task_id, state)
-    print (send_html_mail(tolist, subject, content))
+    send_html_mail(tolist, subject, content)
     return task_id

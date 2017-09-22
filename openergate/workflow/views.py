@@ -300,12 +300,14 @@ def ajax_task(request):
             title = creator_name + work_order_title
             #免审批流程
             if next_role_id == 0:
+                print ('------------4')
                 next_state = 4
                 next_users = creator + ';'
                 data = json.dumps(data)
                 ret = Task.objects.create(title=title, creator=creator, work_order_id=work_order_id, flow=flow,
                     data=data, state=next_state, cur_role_id=next_role_id, cur_users=next_users, cur_user='')
                 task_id = ret.id
+                print ('审批流程',task_id)
                 exec_task.delay(task_id)
                 result = '免审批工单已提交'
             #审批流程
@@ -365,6 +367,7 @@ def ajax_task(request):
             flow = ret.flow
             flow_list = flow.split('-')
             #当前审批人是工单申请人时
+            print ('前审批人是工单申请人时')
             if cur_user == creator and cur_state == 4:
                 print ('cur_user',cur_user)
                 print ('cur_state',cur_state)
@@ -390,6 +393,7 @@ def ajax_task(request):
                     print ('同意')
                     try:
                         exec_task.delay(task_id)
+                        print ('同意',task_id)
                     except Exception as e:
                         print ('错误')
                         logger.error("rabbitmq error:" + e)
@@ -446,7 +450,7 @@ def ajax_task(request):
                 content = '<br>您好！<br>%s 工单任务已审批，等待您审批，<a href="%s/workflow/edit_task?id=%d" target="_blank">点击此处查看处理</a>，谢谢！' % (title, settings.SYS_API, task_id)
                 #邮件通知下一位审批人处理
                 print (tolist,subject,content)
-                print (send_html_mail(tolist, subject, content))
+                send_html_mail(tolist, subject, content)
                 to_creator_content = '<br>您好！<br>%s 工单任务已由%s审批，等待%s审批，<a href="%s/workflow/show_task?id=%d" target="_blank">点击此处查看进度</a>，谢谢！' % (title, cur_user, next_user, settings.SYS_API, task_id)
                 #邮件通知申请人进度
                 print (' #邮件通知申请人进度')

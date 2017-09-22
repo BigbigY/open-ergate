@@ -404,7 +404,7 @@ def ajax_task(request):
                     next_users = creator + ';'
             #当前审批角色非最后一个审批角色时
             else:
-                print ('111111111111')
+                print ('11111111111122222')
                 #撤销
                 if act_type == 0:
                     next_role_id = -1
@@ -436,16 +436,20 @@ def ajax_task(request):
             if username not in cur_users.split(';') and admin_role_id: cur_role_id = admin_role_id
             Task.objects.filter(id=task_id).update(state=next_state, cur_role_id=next_role_id, cur_users=next_users, cur_user='')
             Task_log.objects.create(task_id=task_id,username=username,role_id=cur_role_id,act_type=act_type,act_opinion=act_opinion)
+            print ('邮件通知')
             #邮件通知
             subject = '<%s>工单处理通知' % title
             to_creator_subject = '<%s>工单进度通知' % title
             result = settings.TASK_STATE_DICT[next_state]
+            print (next_state)
             if next_state == 3: 
                 content = '<br>您好！<br>%s 工单任务已审批，等待您审批，<a href="%s/workflow/edit_task?id=%d" target="_blank">点击此处查看处理</a>，谢谢！' % (title, settings.SYS_API, task_id)
                 #邮件通知下一位审批人处理
-                send_html_mail(tolist, subject, content)
+                print (tolist,subject,content)
+                print (send_html_mail(tolist, subject, content))
                 to_creator_content = '<br>您好！<br>%s 工单任务已由%s审批，等待%s审批，<a href="%s/workflow/show_task?id=%d" target="_blank">点击此处查看进度</a>，谢谢！' % (title, cur_user, next_user, settings.SYS_API, task_id)
                 #邮件通知申请人进度
+                print (' #邮件通知申请人进度')
                 send_html_mail([creator_mail], to_creator_subject, to_creator_content)
             if next_state == 1: 
                 result = '已回退'

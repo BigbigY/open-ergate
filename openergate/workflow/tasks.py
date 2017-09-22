@@ -28,6 +28,7 @@ def exec_task(task_id):
     cmd = 'sh %s/%s.sh %s &>%s' % (script_dir, work_order_name, task_id, log_file)
     ret, err = local_cmd(cmd)
     tolist = [user_info.email]
+    print ('工单进度通知0000000')
     subject = '<%s>工单进度通知' % title
     content = '<br>您好！<br>%s 工单任务已处理，等待您确认，<a href="%s/workflow/edit_task?id=%d&state=%d" target="_blank">点击此处查看处理</a>，谢谢！' % (title, settings.SYS_API, task_id, state)
     print (send_html_mail(tolist, subject, content))

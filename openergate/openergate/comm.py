@@ -60,8 +60,8 @@ def local_cmd(cmd):
     ret, err = local_cmd('date')
 
     """
-    import commands
-    err, ret = commands.getstatusoutput(cmd)
+    import subprocess
+    err, ret = subprocess.getstatusoutput(cmd)
     return ret, err
 
 def send_html_mail(tolist, subject, html_content, fromer=None, cclist=None, bcclist=None):

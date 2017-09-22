@@ -153,7 +153,7 @@ ADMINS = (
 DEFAULT_FROM_EMAIL = SERVER_EMAIL = 'wangyy02@bbtree.com'
 EMAIL_HOST = 'smtp.exmail.qq.com'
 EMAIL_HOST_USER = 'wangyy02@bbtree.com'
-EMAIL_HOST_PASSWORD = 'YY520it@123'
+EMAIL_HOST_PASSWORD = 'YY520it@'
 EMAIL_PORT = 465
 EMAIL_SUBJECT_PREFIX = '[workflow] '
 #EMAIL_USE_TLS = False

@@ -76,7 +76,6 @@ $(document).ready(function() {
                       </div><div id="step-2" class="content" style="display: none;">
                       </div><div id="step-3" class="content" style="display: none;">
 </div>
-<div class="ln_solid"></div>
 <div class="adminTable">
 <div class="infoForm">
 <h3>申请人信息</h3>
@@ -88,7 +87,7 @@ $(document).ready(function() {
 <label class="control-label" for="inputEmail">邮箱</label>
 <input id="creator_mail" name="creator_mail" type="text" class="form_2 searchIpnutBtn" value="{{ creator_mail }}" readonly="true">
 <label class="control-label" for="inputEmail">申请时间</label>
-<input id="creator_mail" name="creator_mail" type="text" class="form_2 searchIpnutBtn" value="{{ create_time }}" readonly="true">
+<input id="creator_mail" name="creator_mail" type="text" class="form_2 searchIpnutBtn" value="{{ create_time|date:"Y-m-d H:i:s" }}" readonly="true">
 </div>
 </div>
 {% include template_name %}
@@ -101,8 +100,6 @@ $(document).ready(function() {
 </div>
 </div>
 {% endif %}
-
-
 <div class="adminTable">
 <div class="infoForm">
 <h3>处理意见</h3>
@@ -125,7 +122,7 @@ $(document).ready(function() {
 </select>
 <br><br>
 {% endif %}
-<input id="submit" name="submit" type="submit" value="提交" class="Btn" />
+<input id="submit" name="submit" type="submit" value="提交" class="btn btn-round btn-success" />
 </div>
 </div>
 <div class="adminTable">
@@ -138,7 +135,7 @@ START->{{work_order_flow|get_flow_names}}->{{ role_dict.0 }}->END
 <div class="infoForm">
 <h3>处理人意见</h3>
 {% for row in task_log %}
-<label class="control-label" for="inputEmail">{{ row.create_time}}  {{ role_dict|get_item:row.role_id }}:{{ row.username }}({{ act_type_dict|get_item:row.act_type }})</label><br>
+<label class="control-label" for="inputEmail">{{ row.create_time|date:"Y-m-d H:i:s"}}  {{ role_dict|get_item:row.role_id }}:{{ row.username }}({{ act_type_dict|get_item:row.act_type }})</label><br>
 <label class="control-label" for="inputEmail">{{ row.act_opinion }}</label><br><br>
 {% endfor %}
 </div>
